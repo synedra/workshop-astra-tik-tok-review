@@ -217,6 +217,12 @@ Notice the clipboard icon at the end of each value.
 
 [This video](https://www.youtube.com/watch?v=TUTCLsBuUd4) describes the procedure to generate a token in Astra DB.
 
+> **⚠️ Important**
+> ```
+> The instructor will show you on screen how to create a token 
+> but will have to destroy to token immediately for security reasons.
+> ```
+
 ### 7. Configure and connect database
  * In the repository directory run the following command to set up your Astra DB environment. This will verify the database you created earlier or create a new one for you if it can't find your database.
  ```
