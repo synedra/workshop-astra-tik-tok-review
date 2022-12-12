@@ -24,10 +24,9 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Materials for the Session](#materials-for-the-session)
   - [Homework](#Homework)
 - **Getting Started with Database**
-  - [Create Astra DB Instance](#Create-Astra-DB-Instance)
-  - [Create Astra Credentials](#Create-Astra-Credentials)
-  - [Using Document API](#Using-Document-API)
-  
+  - [Create Astra DB Instance](#01--create-astra-account)
+  - [Create Astra Credentials](#02--create-astra-credentials)
+  - [Using Document API](#using-document-api)
 - **Initialize Dev environment**  
   - [Deploy to Netlify](#2-deploy-to-netlify)
   - [Access YOUR GitHub repository](#3-access-your-github-repository)
@@ -132,18 +131,18 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 > ↗️ _Right Click and select open as a new Tab..._
 
 <a href="https://astra.dev/yt-12-14"><img src="tutorial/images/create_astra_db.png?raw=true" /></a>
-- <details><summary>Show me!</summary>
-    <img src="https://github.com/datastaxdevs/workshop-spring-stargate/raw/main/images/tutorials/astra-create-db.gif?raw=true" />
-</details>
 
 **Use the following values when creating the database**
 |Field| Value|
 |---|---|
 |**database name**| `workshops` |
 |**keyspace**| `tiktok_keyspace` |
-|**Cloud Provider**| *`Google Cloud Plaform` / `* |
+|**Cloud Provider**| *`Google Cloud Plaform` / `North America` / `Moncks Corner, South Carolina`* |
 
 #### `✅.02`- Create Astra Credentials
+
+_Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
+
 
 > **⚠️ Important**
 > ```
@@ -151,30 +150,56 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 > but will have to destroy to token immediately for security reasons.
 > ```
 
-> [Documentation](https://awesome-astra.github.io/docs/pages/astra/create-token)
-
-_Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
-
 - Go the `Organization Settings`
 - Go to `Token Management`
 - Pick the role `Database Admnistrator` on the select box
-- Click Generate token
+- Click `Generate token`
 
 <img src="tutorial/images/astra-create-token.gif?raw=true" />
  
-This is what the token page looks like. * Click the **`Download CSV`** button. You are going to need these values here in a moment.
+- Click the **`Download CSV`** button. You are going to need these values here in a moment.
 
 ![image](tutorial/images/astra-token.png?raw=true)
 
 Notice the clipboard icon at the end of each value.
-
 - `Client ID:` We will *not* use this during this workshop
 - `Client Secret:` We will *not* use this during this workshop
-- `Token:` *This is your token!* We will use it as a api Key to interact with APIS
-
-[This video](https://www.youtube.com/watch?v=TUTCLsBuUd4) describes the procedure to generate a token in Astra DB.
+- `Token:` ***This is your token!*** We will use it as a api Key to interact with APIS
 
 ### Using Document API
+
+Once the database is `active` we can start interacting with it. We will use the document API.
+
+#### `✅.03`- Open Swagger User Interface
+
+- (1) -  Select your database in the left panel
+- (2) -  Select the tab `CONNECT`
+- (3) -  Select the Document API
+- (4) -  Open the Swagger UI
+
+![image](tutorial/images/access-swagger.png?raw=true)
+
+- Display Swagger
+
+![image](tutorial/images/show-swagger.png?raw=true)
+
+#### `✅.04`- Create Collection
+
+
+
+![image](tutorial/images/create-collection.png?raw=true)
+
+#### `✅.04`- List Collections
+
+![image](tutorial/images/list-collections.png?raw=true)
+
+
+#### `✅.04`- Create a Document Collections
+
+![image](tutorial/images/list-collections.png?raw=true)
+
+
+
 
 For our TikTok app, we will not be dealing with the Document API directly. Instead `@astrajs/collections` does that for us, and provides us with easy to use methods.
 
