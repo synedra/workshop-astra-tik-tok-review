@@ -144,22 +144,22 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 _Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
 
 
-> **⚠️ Important**
-> ```
-> The instructor will show you on screen how to create a token 
-> but will have to destroy to token immediately for security reasons.
-> ```
-
-- Go the `Organization Settings`
-- Go to `Token Management`
-- Pick the role `Database Admnistrator` on the select box
-- Click `Generate token`
+- (1) - Go the `Organization Settings`
+- (2) - Go to `Token Management`
+- (3) - Pick the role `Database Admnistrator` on the select box
+- (4) - Click `Generate token`
 
 <img src="tutorial/images/astra-create-token.gif?raw=true" />
  
 - Click the **`Download CSV`** button. You are going to need these values here in a moment.
 
 ![image](tutorial/images/astra-token.png?raw=true)
+
+> **⚠️ Important**
+> ```
+> The instructor will show you on screen how to create a token 
+> but will have to destroy to token immediately for security reasons.
+> ```
 
 Notice the clipboard icon at the end of each value.
 - `Client ID:` We will *not* use this during this workshop
@@ -179,19 +179,66 @@ Once the database is `active` we can start interacting with it. We will use the 
 
 ![image](tutorial/images/access-swagger.png?raw=true)
 
-- Display Swagger
+- You should access to this screen
 
 ![image](tutorial/images/show-swagger.png?raw=true)
 
-#### `✅.04`- Create Collection
+#### `✅.04`- Lists Collections
 
+- Select the resource `GET/v2/namespaces/{namespace-id}/collections`
 
+![image](tutorial/images/list-collection-1.png?raw=true)
 
-![image](tutorial/images/create-collection.png?raw=true)
+- Click the `[Try It Out]` button
 
-#### `✅.04`- List Collections
+![image](tutorial/images/list-collection-1.png?raw=true)
 
-![image](tutorial/images/list-collections.png?raw=true)
+- Populate the form
+
+**Use the following values**
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+
+The output is empty (expected):
+
+```json
+[]
+```
+
+#### `✅.05`- Create Collection `story`
+
+- (1) - Select the resource `POST/v2/namespaces/{namespace-id}/collections`
+
+- (2) - Click the `[Try It Out]` button
+
+- (3) - Populate the form
+
+**Use the following values**
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**namespace-id**| `{"name":"story"}` |
+
+- (4) - You can see the output with `201` (created) code
+
+![image](tutorial/images/create-collection-1.png?raw=true)
+
+- (5) - Following the steps in previous section list collections again, you should get 
+
+```json
+{
+  "data": [
+    {
+      "name": "story",
+      "upgradeAvailable": false
+    }
+  ]
+}
+```
+
 
 
 #### `✅.04`- Create a Document Collections
