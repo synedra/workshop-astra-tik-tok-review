@@ -70,11 +70,11 @@ In this readme, we try to provide instructions for local development as well - b
 </details>
 <p/>
 <details>
-<summary><b> 2️⃣ What other prerequisites are required?</b></summary>
+<summary><b> 2️⃣ What other prerequisites are there?</b></summary>
 <hr>
 <ul>
 <li>You will need an <b>Github account</b>
-<li>You will need an <b>Astra account</b> don't worry, we'll work through that in the following
+<li>You will need an <b>Astra account</b> don't worry, we'll work through that in the workshop
 <li>You will need enough <i>real estate</i> on screen, we will ask you to open a few windows and it would not fit on mobiles (tablets should be OK)
 
 </ul>
@@ -108,7 +108,7 @@ It doesn't matter if you join our workshop live or you prefer to do at your own 
 
 <img src="tutorial/images/tiktok-badge.png?raw=true" width="200" align="right" />
 
-Don't forget to complete your upgrade and get your verified skill badge! Finish and submit your homework!
+Don't forget to complete your work and get your verified skill badge! Finish and submit your homework!
 
 1. Complete the practice steps from this repository as described below. Take a screenshot and show us your deployed production TikTok clone up in Netlify.
 2. (Optional extra credit) Watch the 2 hour Ania video [HERE](#video-tutorial-with-ania-kubow), build the app yourself, and show us the completed app.
@@ -126,7 +126,7 @@ _**`ASTRA`** is the simplest way to run both Cassandra and Pulsar with zero oper
 
 #### `✅.1.1.a`- Create Astra Account
 
-Leveraging [Database creation guide](https://awesome-astra.github.io/docs/pages/astra/create-instance/#c-procedure) create a database. 
+Follow the [Database creation guide](https://awesome-astra.github.io/docs/pages/astra/create-instance/#c-procedure) and create a database. 
 The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.dev/yt-9-14).
 
 > ↗️ _Right Click and select open as a new Tab..._
