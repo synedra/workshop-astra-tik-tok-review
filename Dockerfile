@@ -14,7 +14,7 @@ RUN curl -L https://deb.nodesource.com/setup_18.x | bash \
     && apt-get update -yq \
 	  && apt-get install nodejs
 
-USER github
+USER gitpod
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | TERM=xterm-256color bash >> ./install.log
 RUN npm install -g npm@latest netlify-cli
