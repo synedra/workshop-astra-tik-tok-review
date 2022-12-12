@@ -11,7 +11,6 @@ RUN chown -R gitpod:gitpod /workspace
 
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | TERM=xterm-256color bash >> ./install.log
-RUN cd /workspace/workshop-astra-tik-tok 
 RUN nvm install 16.13.0
 RUN npm install -g npm@latest
 RUN npm install -g netlify-cli
