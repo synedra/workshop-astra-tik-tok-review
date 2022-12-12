@@ -24,26 +24,28 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Materials for the Session](#materials-for-the-session)
   - [Homework](#Homework)
 - **LAB 1 - Getting Started with Database**
-  - [Create Astra DB Instance](#01--create-astra-account)
-  - [Create Astra Credentials](#02--create-astra-credentials)
+  - [1.1 - Create Astra DB Instance](#01--create-astra-account)
+  - [1.2 - Create Astra Credentials](#02--create-astra-credentials)
 - **LAB 2 - Document API**
-  - [Using Document API](#using-document-api)
+  - [2.1 - Using Document API](#using-document-api)
 - **LAB 3 - IDE Setup**  
-  - [Deploy to Netlify](#deploy-to-netlify)
-  - [Launch GitPod](#launch-gitpod-ide)
-  - [Astra CLI Setup](#astra-cli-setup)
-  - [Netlify CLI Setup](#netlify-cli-setup)
-  - [Launch the application](#launch-your-app)
+  - [3.1 - Netlify site setup](#deploy-to-netlify)
+  - [3.2 - Launch GitPod](#launch-gitpod-ide)
+  - [3.3 - Astra CLI Setup](#astra-cli-setup)
+  - [3.4 - Netlify CLI Setup](#netlify-cli-setup)
+  - [3.5 - Launch the application](#launch-your-app)
 - **LAB 4 - Coding Against DB**
-  - [Document API](#7-configure-and-connect-database)
-  - [AstraJS Client](#7-configure-and-connect-database)
-  - [Serverless configuration](#15-serverless-configuration)
-  - [React Component](#)
+  - [4.1 - Document API](#7-configure-and-connect-database)
+  - [4.2 - AstraJS Client](#7-configure-and-connect-database)
+  - [4.3 - Serverless configuration](#15-serverless-configuration)
+  - [4.4 - React Component](#)
 - **LAB 5 - Netlify Deployments**
-  - [Connect Netlify to your site](#9-connect-netlify-to-your-site)
-  - [Deploy to production](#10-deploy-to-production)
+  - [5.1 - Connect Netlify to your site](#9-connect-netlify-to-your-site)
+  - [5.2 - Deploy to production](#10-deploy-to-production)
 
-## Objectives
+## Housekeeping
+
+### 1 - Objectives
 
 - 🎯 How to build a frontend application using React Components
 
@@ -53,7 +55,7 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
 
 - 🎯 Learn what is gitpod and how you can use it in your projects
 
-## Frequently asked questions
+### 2 - Frequently asked questions
 
 <p/>
 <details>
@@ -93,8 +95,7 @@ Attending the session is not enough. You need to complete the homework detailed 
 </details>
 <p/>
 
-
-## Materials for the Session
+### 3 - Materials for the Session
 
 It doesn't matter if you join our workshop live or you prefer to do at your own pace, we have you covered. In this repository, you'll find everything you need for this workshop:
 
@@ -104,7 +105,7 @@ It doesn't matter if you join our workshop live or you prefer to do at your own 
 - [What is JamStack?](jamstack.md)
 - [Video tutorial with Ania Kubow](#video-tutorial-with-ania-kubow)
 
-## Homework
+### 4 - Homework
 
 <img src="tutorial/images/tiktok-badge.png?raw=true" width="200" align="right" />
 
@@ -118,11 +119,13 @@ That's it, you are done! Expect an email next week!
   
 # 🏁 Start Hands-on
 
-### Getting Started with Database
+## LAB 1 - Getting Started with Database
+
+### 1.1 - Getting Started with Database
 
 _**`ASTRA`** is the simplest way to run both Cassandra and Pulsar with zero operations at all - just push the button and get your clusters. No credit card required_
 
-#### `✅.01`- Create Astra Account
+#### `✅.1.1.a`- Create Astra Account
 
 Leveraging [Database creation guide](https://awesome-astra.github.io/docs/pages/astra/create-instance/#c-procedure) create a database. 
 The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.dev/yt-9-14).
@@ -138,7 +141,9 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 |**keyspace**| `tiktok_keyspace` |
 |**Cloud Provider**| *`Google Cloud Plaform` / `North America` / `Moncks Corner, South Carolina`* |
 
-#### `✅.02`- Create Astra Credentials
+### 1.2 - Create Astra Credentials
+
+#### `✅.1.2.a`- Create Astra Credentials
 
 _Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
 
@@ -149,6 +154,8 @@ _Skip this step is you already have a token. You can reuse the same token in our
 
 <img src="tutorial/images/astra-create-token.gif?raw=true" />
  
+#### `✅.1.2.b`- Download Astra Credentials
+
 - Click the **`Download CSV`** button. You are going to need these values here in a moment.
 
 ![image](tutorial/images/astra-token.png?raw=true)
@@ -164,11 +171,13 @@ Notice the clipboard icon at the end of each value.
 - `Client Secret:` We will *not* use this during this workshop
 - `Token:` ***This is your token!*** We will use it as a api Key to interact with APIS
 
-### Using Document API
+## LAB 2 - Document API
+
+### 2.1 Using Document API
 
 Once the database status becomes is `active` we can start interacting with it. We will use the HTTP document API.
 
-#### `✅.03`- Open Swagger User Interface
+#### `✅.2.1.a`- Open Swagger User Interface
 
 - (1) -  Select your database in the left panel
 - (2) -  Select the tab `Connect`
@@ -183,7 +192,7 @@ Once the database status becomes is `active` we can start interacting with it. W
 >
 > ![image](tutorial/images/show-swagger.png?raw=true)
 
-#### `✅.04`- Lists Collections
+#### `✅.2.1.b`- Lists Collections
 
 - (1) - Select the resource `GET/v2/namespaces/{namespace-id}/collections`
 
@@ -208,7 +217,7 @@ The output is empty (expected):
 []
 ```
 
-#### `✅.05`- Create Collection `story`
+#### `✅.2.1.c`- Create Collection `story`
 
 - (1) - Select the resource `POST/v2/namespaces/{namespace-id}/collections`
 
@@ -241,7 +250,7 @@ The output is empty (expected):
 }
 ```
 
-#### `✅.05`- Create a first document
+#### `✅.2.1.d`- Create a first document
 
 With a document oriented API there is no strict schema to comply with. As such let us decide what a story could look like.
 
@@ -280,14 +289,15 @@ With a document oriented API there is no strict schema to comply with. As such l
 }
 ```
 
-#### `✅.06`- Search documents in a collections
+#### `✅.2.1.e`- Search documents in a collections
 
-#### `✅.07`- Update a document
+#### `✅.2.1.f`- Update a document
 
-#### `✅.08`- Delete a document
+#### `✅.2.1.g`- Delete a document
 
+## LAB 3 - IDE Setup
 
-### Deploy to Netlify
+### 3.1 - Netlify Site Setup
 
 - (1) (right) Click the button to deploy.
 
@@ -320,7 +330,9 @@ With a document oriented API there is no strict schema to comply with. As such l
 > <img src="tutorial/images/deploy-5.png" />
 
 
-### Launch GitPod IDE
+### 3.2 - Launch GitPod
+
+#### `✅.3.2.a`- Open YOUR GITHUB REPOSITORY README 
 
 - Click the button to launch the GitPod IDE from **YOUR** repository.
 
@@ -330,9 +342,13 @@ With a document oriented API there is no strict schema to comply with. As such l
 
 If you are still using the `datastaxdevs` repo please ensure to follow the previous step, [step3](#3-clone-your-github-repository) to get to your repo.
 
+#### `✅.3.2.b`- Open Gitpod IDE
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
    
 #### WAIT! Before moving on ensure you are working out of YOUR repository, not the datastaxdevs repository.
+
+#### `✅.3.2.c`- Validating your not using `datastaxdevs`
 
 - From your GitPod terminal execute the following command
 
@@ -342,9 +358,9 @@ git remote -v
 
 If the result returned from the command displays **`datastaxdevs`** then you are not in the correct repository. If this is the case please [repeat step 3 above](#3-access-your-github-repository), otherwise just move on to the next step.
 
-### Astra CLI Setup
+### 3.3 - Astra CLI Setup
 
-#### `✅.01`- Save your token
+#### `✅.3.3.a`- Save your token
 
 Locate an open terminal and enter the following command replacing `<YOUR_TOKEN>` by the one we created before starting with `AstraCS:..` it should be in the CSV we download before
 
@@ -352,7 +368,7 @@ Locate an open terminal and enter the following command replacing `<YOUR_TOKEN>`
 astra setup -t <YOUR_TOKEN>
 ```
 
-#### `✅.02`- Validate your configuration
+#### `✅.3.3.b`- Validate your configuration
 
 ```
 astra user list
@@ -369,7 +385,7 @@ astra user list
 > +--------------------------------------+-----------------------------+---------------------+
 > ```
 
-#### `✅.03`- Create `workshops` with keyspace `tiktok_keyspace` (if needed)
+#### `✅.3.3.c`- Create `workshops` with keyspace `tiktok_keyspace` (if needed)
 
 ```
 astra db create workshops -k tiktok_keyspace --if-not-exist 
@@ -383,7 +399,7 @@ astra db create workshops -k tiktok_keyspace --if-not-exist
 > [OK]    Database 'workshops' is ready.
 > ```
 
-#### `✅.04`- Get db details
+#### `✅.3.3.d`- Get db details
 
 ```
 astra db get workshops
@@ -412,7 +428,7 @@ astra db get workshops
 > +------------------------+-----------------------------------------+
 > ```
 
-#### `✅.05`- Create configuration file
+#### `✅.3.3.e`- Create configuration file
 
  - Create `.env` file
 
@@ -446,79 +462,108 @@ cat .env
 > ASTRA_ORG_TOKEN="AstraCS:gfYSGwpaFNGmUZnZT....."
 > ```
 
+### 3.4 - Netlify CLI Setup
 
-### Netlify CLI Setup
+#### `✅.3.4.a`- Install the package 
 
- * In the `workshop-astra-tik-tok` directory run the following command to install the netlify-cli
+In the `workshop-astra-tik-tok` directory run the following command to install the netlify-cli
 
 ```
- npm install -g netlify-cli
+npm install -g netlify-cli
 ```
 
+> 🖥️ `Output`
+>
 > <img src="tutorial/images/netlify-install-cli.png?raw=true" />
 
 
-### Launch your app
+### 3.5 Launch your app
 
-Run the application 
+#### `✅.3.5.a`- Start application
 
-  ```
-  netlify dev
-  ```
+```
+netlify dev
+```
 
-The application should automatically launch in the GitPod preview pane
+The application should automatically launch in the GitPod preview pane. You might see an error in the log for this firt launch, some data is inserted to the database.
 
-### 9. Connect Netlify to your site
-Execute each of the commands below to link your code to your Netlify deployment.
-  * First thing, we'll need to **STOP** the `netlify dev` command we issued a moment ago. In the terminal where you executed the netlify command issue a `CTRL-C` (control key + the C key) in order to stop the process.
-  * Then continue with the following commands
-  * This will pop up a browser to authenticate with netlify
-  ```
-  netlify login
-  ```
-  _Note, when using GitPod the preview pane will not display this properly. You must click the "open in a new window" button in the very top right of the preview pane._
+## LAB 4 - Coding Against DB
 
-  * This will link your workspace to the associated site
-  ```
-  netlify link
-  ```
+### 4.1 - Document API
 
-  * This will take the .env file created by astra-setup and upload it to netlify
-  ```
-  netlify env:import .env
-  ```
+Using same instruction as #2.1 execute the following operation with the Document Api using swagger UI.
 
-<!--
-  * Will be used to allow you to execute `netlify open`
-  ```
-  netlify sites:list
-  ```
--->
+- (1) List the collections, a new collection has been created for the application: `tktkposts` 
 
-### 10. Deploy to production
-Now that you've hooked everything up, time to deploy to production.
+> 🖥️ `Output`
+>
+> ```json
+> {
+>   "data": [
+>     {
+>       "name": "story",
+>       "upgradeAvailable": false
+>     },
+>     {
+>       "name": "tktkposts",
+>       "upgradeAvailable": false
+>     }
+>   ]
+> }
+> ```
 
-  * Run
-  ```
-  netlify build
-  ```
+- (2) List the documents in the new collection to see what the dataset looks like
 
-  * Then run
-  ```
-  netlify deploy --prod
-  ```
+> 🖥️ `Output`
+>
+> ```json
+> {
+>   "pageState": "ATIA8H_____wf____w==",
+>   "data": {
+>     "0": {
+>       "avatar": "https://i.imgur.com/jONHmE5.png",
+>       "button_visible": true,
+>       "caption": "Art is for everyone",
+>       "comments": 20,
+>       "id": 0,
+>       "is_followed": true,
+>       "likes": 231,
+>       "name": "Lana Del Mont",
+>       "timestamp": "2020-09-10T09:08:31.020Z",
+>       "username": "lana_del_away",
+>       "video": "https://i.imgur.com/H9UX0Jm.mp4"
+>     },
+>     "2": {
+>       "avatar": "https://i.imgur.com/eX3hkoc.png",
+>       "button_visible": true,
+>       "caption": "Happiest of Birthdays my Angel",
+>       "comments": 4,
+>       "id": 2,
+>       "is_followed": true,
+>       "likes": 2,
+>       "name": "Angela Lee",
+>       "timestamp": "2020-04-10T09:08:31.020Z",
+>       "username": "angiecakes",
+>       "video": "https://i.imgur.com/al6MLay.mp4"
+>     },
+>     "3": {
+>       "avatar": "https://i.imgur.com/IigY4Hm.png",
+>       "button_visible": true,
+>       "caption": "The new normal",
+>       "comments": 2,
+>       "id": 3,
+>       "is_followed": false,
+>       "likes": 10,
+>       "name": "Nina Xen",
+>       "timestamp": "2020-05-10T09:08:31.020Z",
+>       "username": "nina_lina",
+>       "video": "https://i.imgur.com/Kzvbeup.mp4"
+>     }
+>   }
+> }
+> ```
 
-  * Then finally run
-  ```
-  netlify open:site
-  ```
-  
-  You've deployed your app to Netlify!
-  ![Netlify Setup Example](./tutorial/images/netlify-livesite.png?raw=true)
-
-# Part 2 - Working with AstraDB and the document API
-
-### 11. Connecting the Database
+### 4.2 - AstraJS Client
 
 Let's briefly dive into the connection between our serverless functions and our Astra DB.
 We are using the `@astrajs/collections` library to make the connection using the Document API provided by Stargate. To do so, we start by creating a 'client'. 
@@ -680,7 +725,9 @@ So how do these functions work with no back-end server?
 
 The short answer is that Netlify is providing the back-end environment for us. All we have to do is tell Netlify where to find the functions. Netlify will do the rest.
 
-### 15. Serverless configuration
+### 4.3 - Serverless configuration
+
+
 
 Take a look at `netlify.toml`.
 
@@ -710,7 +757,63 @@ We can also see this in action by manually going to the endpoint on our Netlify 
 
 ![netlify_endpoint](./tutorial/images/netlify_endpoint_nav.gif)
 
-## Extra resources
+### 4.4 - React Component
+
+## LAB 5 - Netlify Deployments
+
+
+### 5.1 - Connect Netlify to your site
+
+Execute each of the commands below to link your code to your Netlify deployment.
+  * First thing, we'll need to **STOP** the `netlify dev` command we issued a moment ago. In the terminal where you executed the netlify command issue a `CTRL-C` (control key + the C key) in order to stop the process.
+  * Then continue with the following commands
+  * This will pop up a browser to authenticate with netlify
+  ```
+  netlify login
+  ```
+  _Note, when using GitPod the preview pane will not display this properly. You must click the "open in a new window" button in the very top right of the preview pane._
+
+  * This will link your workspace to the associated site
+  ```
+  netlify link
+  ```
+
+  * This will take the .env file created by astra-setup and upload it to netlify
+  ```
+  netlify env:import .env
+  ```
+
+<!--
+  * Will be used to allow you to execute `netlify open`
+  ```
+  netlify sites:list
+  ```
+-->
+
+### 5.2 - Deploy to production
+
+Now that you've hooked everything up, time to deploy to production.
+
+  * Run
+  ```
+  netlify build
+  ```
+
+  * Then run
+  ```
+  netlify deploy --prod
+  ```
+
+  * Then finally run
+  ```
+  netlify open:site
+  ```
+  
+  You've deployed your app to Netlify!
+  ![Netlify Setup Example](./tutorial/images/netlify-livesite.png?raw=true)
+
+
+## Extra Resources
 
 #### Video tutorial with Ania Kubow
 
