@@ -438,7 +438,7 @@ If you are still using the `datastaxdevs` repo please ensure to follow the previ
    
 #### WAIT! Before moving on ensure you are working out of YOUR repository, not the datastaxdevs repository.
 
-#### `✅.3.2.c`- Validating your not using `datastaxdevs`
+#### `✅.3.2.c`- Validating you're not using `datastaxdevs`
 
 - From your GitPod terminal execute the following command
 
