@@ -28,13 +28,13 @@ COPY --chown=gitpod:gitpod /root/config/.bashrc /home/gitpod/.bashrc $HOME/.bash
 
 RUN pip3 install httpie-astra 
 
-echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
-curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
-cd /workspace/workshop-astra-tik-tok 
-nvm install 16.13.0
-npm install -g npm@latest
-npm install -g netlify-cli
-npm install
+RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
+RUN curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
+RUN cd /workspace/workshop-astra-tik-tok 
+RUN nvm install 16.13.0
+RUN npm install -g npm@latest
+RUN npm install -g netlify-cli
+RUN npm install
 
 EXPOSE 8888
 EXPOSE 8443
