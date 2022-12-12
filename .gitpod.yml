@@ -3,6 +3,9 @@ image:
   
 tasks:
   - name: workshop-astra-tik-tok
+    before: |
+      cd /workspace/workshop-astra-tik-tok 
+      npm install
     command: |
       source ~/.bashrc
       echo "workshop-astra-tik-tok gitpod ready - LET'S DO THIS!"
