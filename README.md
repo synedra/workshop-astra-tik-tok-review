@@ -28,10 +28,12 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Create Astra Credentials](#02--create-astra-credentials)
   - [Using Document API](#using-document-api)
 - **Initialize Dev environment**  
-  - [Deploy to Netlify](#2-deploy-to-netlify)
-  - [Access YOUR GitHub repository](#3-access-your-github-repository)
-  - [Launch GitPod](#4-launch-gitpod-ide)
+  - [Deploy to Netlify](#deploy-to-netlify)
+  - [Launch GitPod](#launch-gitpod-ide)
+  - [Astra CLI Setup](#astra-cli-setup)
+  - [Netlify CLI Setup](#astra-cli-setup)
 - **Interact with Database**  
+  
   - [Configure and connect database](#7-configure-and-connect-database)
   - [Install the Netlify CLI](#5-install-the-netlify-cli-command-line-interface)
   - [Connecting the Database](#11-connecting-the-database)
@@ -246,7 +248,6 @@ The output is empty (expected):
 
 With a document oriented API there is no strict schema to comply with. As such let us decide what a story could look like.
 
-
 - (1) - Select the resource `POST/v2/namespaces/{namespace-id}/collections/{collection-id}` _Create a new Document_
 
 - (2) - Click the `[Try It Out]` button
@@ -258,9 +259,10 @@ With a document oriented API there is no strict schema to comply with. As such l
 |**X-Cassandra-Token**| _autopopulated_ |
 |**namespace-id**| `tiktok_keyspace` |
 |**collection-id**| `story` |
-|**body**| ```json
+
+**body:** 
+```json
 {
-  "id": 0,
   "name": "Mo Farooq",
   "username": "mofarooq32",
   "avatar": "https://i.imgur.com/9KYq7VG.png",
@@ -269,154 +271,61 @@ With a document oriented API there is no strict schema to comply with. As such l
   "caption": "These ducks are MEGA cute",
   "likes": 10,
   "comments": 2,
-  "timestamp": "2019-03-10T09:08:31.020Z",
-  "button_visible": true,
-}
-``` |
-
-
-
-
-#### `✅.04`- Create a Document Collections
-
-![image](tutorial/images/list-collections.png?raw=true)
-
-
-
-
-For our TikTok app, we will not be dealing with the Document API directly. Instead `@astrajs/collections` does that for us, and provides us with easy to use methods.
-
-If you want a comprehensive list of the capabilities of `@astrajs/collections`, check out this documentation: [AstraJS Collections](https://docs.datastax.com/en/astra/docs/astra-collection-client.html)
-
-For now, let's go over the 3 methods we'll be using in this app:
-
-- `create`
-- `update`
-- `find`
-
-<br/>
-
-### 12. Create
-
-The `create` method is used when we want to add documents to our collection. For example, in **`functions/add.js`** we get our collection from the database using our `getCollection` method.
-
-``` javascript
-const users = await getCollection();
-```
-
-Then we use the `create` method to create a document, providing the _id_ and _body_ of the document.
-
-``` javascript
-try {
-    const user = await users.create(id, event.body);
-    return {
-      statusCode: 200,
-      body: JSON.stringify(user),
-    };
+  "button_visible": true
 }
 ```
 
-<br/>
+- (4) - Should get a HTTP `201` (Created) and the output. A unique identifier has been created for our document.
 
-### 13. Update
-
-The `update` method is used to update portions of existing documents. Take a look at **`functions/edit.js`**. Again we use `getCollection()` to get our collection from the database, then we use the `update` method, provide it with an id for the document we want to edit, and the data that needs updating.
-
-``` javascript
-try {
-    users.update(body.userId, body.data);
-    return {
-      statusCode: 200,
-    };
-  }
+```json
+{
+  "documentId": "8aa07632-4ffb-46e5-9d78-b32e21847221"
+}
 ```
 
-<br/>
+#### `✅.06`- Search documents in a collections
 
-### 14. Find
+#### `✅.07`- Update a document
 
-And finally the `find` method is used to retrieve documents. In **`functions/posts.js`** we are again using `getCollections()` and using the `find` method on the result.
-
-``` javascript
-try {
-    const res = await users.find({});
-    return {
-      statusCode: 200,
-      body: JSON.stringify(Object.keys(res).map((i) => res[i])),
-    };
-  }
-```
-
-In this case, we are passing an empty object to retrieve all documents. In a real-world scenario, we would pass a qualifier to get only the documents relevant to a specific user.
-
-Let's go back to SwaggerUI and give this a test.
-
-✅ Back in SwaggerUI, open up the section labelled "Search documents in a collection".
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_02.png?raw=true)
-
-✅ Again, we have to provide the Application Token, keyspace name, and this time we will also include the collection id: **`tktkposts`**. We should also increase the page size as the tool defaults to only returning 1 document, and we will be retrieving many. Go ahead and fill those fields and click 'Execute'.
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_03.png?raw=true)
-
-And we see all of the documents stored in our database.
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_04.png?raw=true)
+#### `✅.08`- Delete a document
 
 
+### Deploy to Netlify
 
-### 2. Deploy to Netlify
-- <details><summary> What does the netlify deploy button do?</summary>The Netlify deploy button will:<ul>
-    <li>Create a new repository for you on Github</li>
-    <li>Create a site on Netlify</li>
-    <li>Link the two together.</li></ul>
-</details>
+- (1) (right) Click the button to deploy.
 
-- Click the button to deploy
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/datastaxdevs/workshop-astra-tik-tok)
 
-  [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/datastaxdevs/workshop-astra-tik-tok)
- * <details><summary>Show me!</summary>
-    <img src="tutorial/images/deploy-to-netlify.gif?raw=true" />
-    </details>
+- (2) - Authentification with your github Account
 
-This will take a few minutes.
+- (3) - Select account and github repository where to clone
 
-  * Click on `Site deploy in progress` within the Netlify UI, 
-    <details>
-    <summary>Show me! </summary>
-    <img src="tutorial/images/deploy-1.png" />
-    </details>
+<img src="tutorial/images/deploy-to-netlify.gif?raw=true" />
+    
+- (3) - In netlify user interface click on `Site deploy in progress` 
 
-  * Click the top deploy link to see the build process.
-    <details>
-    <summary>Show me! </summary>
-    <img src="tutorial/images/deploy-2.png" />
-    </details>
+> <img src="tutorial/images/deploy-1.png" />
 
-  * Wait until the build complete `Netlify Build Complete`,  **When you see Pushing to repository** you're ready to move on.
-    <details>
-    <summary>Show me! </summary>
-    <img src="tutorial/images/deploy-3.png" />
-    </details>
+- (4) - Click the top deploy link to see the build process.
 
-  * Scroll up to the top and click on the site name (it'll be after {yourlogin}'s Team next to the Netlify button).
-    <details>
-    <summary>Show me! </summary>
-    <img src="tutorial/images/deploy-4.png" />
-    </details>
+> <img src="tutorial/images/deploy-2.png" />
 
-### 3. Access YOUR GitHub repository
+- (5) - Wait until the build complete `Netlify Build Complete`,  **When you see Pushing to repository** you're ready to move on.
 
-  * Click on the `GitHub` in `Deploys from GitHub` to get back to your new repository.  Scroll to where you were in the README.
-    <details>
-    <summary>Show me! </summary>
-    <img src="tutorial/images/deploy-5.png" />
-    </details>
+> <img src="tutorial/images/deploy-3.png" />
 
-### 4. Launch GitPod IDE
+- (6) Scroll up to the top and click on the site name (it'll be after {yourlogin}'s Team next to the Netlify button).
+
+> <img src="tutorial/images/deploy-4.png" />
+
+- (7) - Click on the `GitHub` in `Deploys from GitHub` to get back to your new repository.  Scroll to where you were in the README.
+
+> <img src="tutorial/images/deploy-5.png" />
+
+
+### Launch GitPod IDE
+
 - Click the button to launch the GitPod IDE from **YOUR** repository.
-
-* _Supported by <img src="tutorial/images/chrome-logo.svg" height="20"/> Chrome and <img src="tutorial/images/firefox-logo.svg" height="20"/> Firefox_
 
 #### WAIT! Before moving on ensure you are working out of YOUR repository, not the datastaxdevs repository.
 
@@ -424,61 +333,132 @@ This will take a few minutes.
 
 If you are still using the `datastaxdevs` repo please ensure to follow the previous step, [step3](#3-clone-your-github-repository) to get to your repo.
 
- * Ok, I've got it, just give me the button already
- * <details>
-     <summary>CLICK HERE to launch GitPod</summary>
-
-     [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
-   </details>
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
    
 #### WAIT! Before moving on ensure you are working out of YOUR repository, not the datastaxdevs repository.
-* From your GitPod terminal execute the following command
-```
+
+- From your GitPod terminal execute the following command
+
+```bash
 git remote -v
 ```
 
 If the result returned from the command displays **`datastaxdevs`** then you are not in the correct repository. If this is the case please [repeat step 3 above](#3-access-your-github-repository), otherwise just move on to the next step.
 
-### 5. Install the Netlify CLI (Command Line Interface)
+### Astra CLI Setup
+
+#### `✅.01`- Save your token
+
+Locate an open terminal and enter the following command replacing `<YOUR_TOKEN>` by the one we created before starting with `AstraCS:..` it should be in the CSV we download before
+
+```
+astra setup -t <YOUR_TOKEN>
+```
+
+#### `✅.02`- Validate your configuration
+
+```
+astra user list
+```
+
+> 🖥️ `Output`
+>
+> ```
+> gitpod /workspace/workshop-astra-tik-tok (master) $ astra user list
+> +--------------------------------------+-----------------------------+---------------------+
+> | User Id                              | User Email                  | Status              |
+> +--------------------------------------+-----------------------------+---------------------+
+> | b665658a-ae6a-4f30-a740-2342a7fb469c | cedrick.lunven@datastax.com | active              |
+> +--------------------------------------+-----------------------------+---------------------+
+> ```
+
+#### `✅.03`- Create `workshops` with keyspace `tiktok_keyspace` (if needed)
+
+```
+astra db create workshops -k tiktok_keyspace --if-not-exist 
+```
+
+> 🖥️ `Output`
+>
+> ```
+> [INFO]  Database 'workshops' already exist. Connecting to database.
+> [INFO]  Keyspace  'tiktok_keyspace' already exists. Connecting to keyspace.
+> [OK]    Database 'workshops' is ready.
+> ```
+
+#### `✅.04`- Get db details
+
+```
+astra db get workshops
+```
+
+> 🖥️ `Output`
+>
+> ```
+> gitpod /workspace/workshop-astra-tik-tok (master) $ astra db get workshops
+> +------------------------+-----------------------------------------+
+> | Attribute              | Value                                   |
+> +------------------------+-----------------------------------------+
+> | Name                   | workshops                               |
+> | id                     | 50b31120-2303-4f45-a9dd-1cfb03e24ff1    |
+> | Status                 | ACTIVE                                  |
+> | Default Cloud Provider | GCP                                     |
+> | Default Region         | us-east1                                |
+> | Default Keyspace       | tiktok_keyspace                         |
+> | Creation Time          | 2022-12-12T11:14:58Z                    |
+> |                        |                                         |
+> | Keyspaces              | [0] tiktok_keyspace                     |
+> |                        |                                         |
+> |                        |                                         |
+> | Regions                | [0] us-east1                            |
+> |                        |                                         |
+> +------------------------+-----------------------------------------+
+> ```
+
+#### `✅.05`- Create configuration file
+
+ - Create `.env` file
+
+```
+astra db create-dotenv workshops
+```
+
+- Show content
+
+```
+cat .env
+```
+
+> 🖥️ `Output`
+>
+> ```
+> ASTRA_DB_APPLICATION_TOKEN="AstraCS:gfYSGwpaFNGmUZnZTvaCp......"
+> ASTRA_DB_GRAPHQL_URL="https://.....-us-east1.apps.astra.datastax.com/api/graphql/tiktok_keyspace"
+> ASTRA_DB_GRAPHQL_URL_ADMIN="https://.....-us-east1.apps.astra.datastax.com/api/graphql-admin"
+> ASTRA_DB_GRAPHQL_URL_PLAYGROUND="https://.....-us-east1.apps.astra.datastax.com/api/playground"
+> ASTRA_DB_GRAPHQL_URL_SCHEMA="https://.....-us-east1.apps.astra.datastax.com/api/graphql-schema"
+> ASTRA_DB_ID="....."
+> ASTRA_DB_KEYSPACE="tiktok_keyspace"
+> ASTRA_DB_REGION="us-east1"
+> ASTRA_DB_REST_URL="https://.....-us-east1.apps.astra.datastax.com/api/rest"
+> ASTRA_DB_REST_URL_SWAGGER="https://.....-us-east1.apps.astra.datastax.com/api/rest/swagger-ui/"
+> ASTRA_DB_SECURE_BUNDLE_PATH="/home/gitpod/.astra/scb/scb_....._us-east1.zip"
+> ASTRA_DB_SECURE_BUNDLE_URL="secured_url"
+> ASTRA_ORG_ID="f9460f14-9879-4ebe-83f2-48d3f3dce13c"
+> ASTRA_ORG_NAME="cedrick.lunven@datastax.com"
+> ASTRA_ORG_TOKEN="AstraCS:gfYSGwpaFNGmUZnZT....."
+> ```
+
+
+### Netlify CLI Setup
+
  * In the `workshop-astra-tik-tok` directory run the following command to install the netlify-cli
- ```
+
+```
  npm install -g netlify-cli
 ```
- * <details><summary>Show me!</summary>
-    <img src="tutorial/images/netlify-install-cli.png?raw=true" />
-    </details>
 
-
-
-### 7. Configure and connect database
- 
-- Setup the CLI
-
-```
-astra setup -t token
-```
-
-
-astra db get workshops
-+------------------------+-----------------------------------------+
-| Attribute              | Value                                   |
-+------------------------+-----------------------------------------+
-| Name                   | workshops                               |
-| id                     | 50b31120-2303-4f45-a9dd-1cfb03e24ff1    |
-| Status                 | ACTIVE                                  |
-| Default Cloud Provider | GCP                                     |
-| Default Region         | us-east1                                |
-| Default Keyspace       | tiktok_keyspace                         |
-| Creation Time          | 2022-12-12T11:14:58Z                    |
-|                        |                                         |
-| Keyspaces              | [0] tiktok_keyspace                     |
-|                        |                                         |
-|                        |                                         |
-| Regions                | [0] us-east1                            |
-|                        |                                         |
-+------------------------+-----------------------------------------+
-
-
+> <img src="tutorial/images/netlify-install-cli.png?raw=true" />
 
 
 ### 8. Launch your app
