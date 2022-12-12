@@ -1,3 +1,6 @@
+image: 
+  file: Dockerfile
+  
 tasks:
   - name: workshop-astra-tik-tok
     command: |
