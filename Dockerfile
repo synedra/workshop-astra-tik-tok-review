@@ -23,8 +23,6 @@ RUN npm install --location=global astra-setup-linkedin@0.3.5 axios node-jq
 RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 RUN chown -R gitpod:gitpod /workspace
 
-COPY --chown=gitpod:gitpod /root/config/.bashrc  $HOME/.bashrc
-
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
 RUN cd /workspace/workshop-astra-tik-tok 
