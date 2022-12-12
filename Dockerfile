@@ -9,11 +9,12 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/g
 RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 RUN chown -R gitpod:gitpod /workspace
 
+
 RUN curl -L https://deb.nodesource.com/setup_18.x | bash \
     && apt-get update -yq \
 	  && apt-get install nodejs
 
-
+USER github
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | TERM=xterm-256color bash >> ./install.log
 RUN npm install -g npm@latest netlify-cli
