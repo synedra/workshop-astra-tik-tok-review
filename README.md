@@ -493,7 +493,24 @@ The application should automatically launch in the GitPod preview pane. You migh
 
 Using same instruction as #2.1 execute the following operation with the Document Api using swagger UI.
 
-- (1) List the collections, a new collection has been created for the application: `tktkposts` 
+#### `✅.4.1.a`- Reopen Swagger
+
+Now that we have locally deployed our TikTok app, let's take a look at this in our database. Head to your [Astra DB dashboard](astra.datastax.com) and click the `Connect` button next to your database ('workshops').
+
+![db_connect](./tutorial/images/db_connect.png?raw=true)
+
+Then scroll down to the section called 'Launching SwaggerUI' and click the link. We'll be using SwaggerUI to make api calls to our database and see the results.
+
+![swaggerui_link](./tutorial/images/swaggerui_link.png?raw=true)
+
+
+#### `✅.4.1.a`- List Collections
+
+Open up the first section labelled "List collections in namespace" and click the button "Try it out".
+
+![swaggerui_link](./tutorial/images/swaggerui_listcollections_02.png?raw=true)
+
+- Execture with `[Execute]` button
 
 > 🖥️ `Output`
 >
@@ -512,7 +529,23 @@ Using same instruction as #2.1 execute the following operation with the Document
 > }
 > ```
 
-- (2) List the documents in the new collection to see what the dataset looks like
+#### `✅.4.1.b`- List Documents of `tktkposts`
+
+- Open resource `GET /v2/namespaces/{namespace-id}/collections/{collection-id}` _Search documents in a collection_
+
+![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_02.png?raw=true)
+
+- Populate the form with the following values
+
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**collection-id**| `tktkposts` |
+
+Let the rest of the fields untouched. You can see that every query is paged and default page size is `3`.And we see all of the documents stored in our database.
+
+![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_04.png?raw=true)
 
 > 🖥️ `Output`
 >
@@ -565,6 +598,8 @@ Using same instruction as #2.1 execute the following operation with the Document
 
 ### 4.2 - AstraJS Client
 
+#### `✅.4.2.1` - Initialization 
+
 Let's briefly dive into the connection between our serverless functions and our Astra DB.
 We are using the `@astrajs/collections` library to make the connection using the Document API provided by Stargate. To do so, we start by creating a 'client'. 
 
@@ -615,45 +650,11 @@ In this method, we are using our previously created `getAstraClient` method to i
 
 We will call the collection "**tktkposts**".
 
-So now, any time we want to perform operations on our data, we will reference this method `getCollection`, and use the Document API from Stargate to do so.
-
-✅ Now that we have locally deployed our TikTok app, let's take a look at this in our database. Head to your [Astra DB dashboard](astra.datastax.com) and click the `Connect` button next to your database ('workshops').
-
-![db_connect](./tutorial/images/db_connect.png?raw=true)
-
-✅ Then scroll down to the section called 'Launching SwaggerUI' and click the link. We'll be using SwaggerUI to make api calls to our database and see the results.
-
-![swaggerui_link](./tutorial/images/swaggerui_link.png?raw=true)
-
-✅ Open up the first section labelled "List collections in namespace" and click the button "Try it out".
-
-![swaggerui_link](./tutorial/images/swaggerui_listcollections_02.png?raw=true)
-
-✅ We need to provide our Application Token, and our keyspace name. Fortunately we have these already saved in our environment variables in the `.env` file. Go ahead and copy those over, then click 'Execute'.
-
-![swaggerui_link](./tutorial/images/swaggerui_listcollections_03.png?raw=true)
-
-And there we go, we see that a collection has been made in our database called "**tktkposts**"
-
-![swaggerui_link](./tutorial/images/swaggerui_listcollections_04.png?raw=true)
-
-<br/>
-
-## Document API
+#### `✅.4.2.b` - Create document with `@astrajs/collections`  
 
 For our TikTok app, we will not be dealing with the Document API directly. Instead `@astrajs/collections` does that for us, and provides us with easy to use methods.
 
 If you want a comprehensive list of the capabilities of `@astrajs/collections`, check out this documentation: [AstraJS Collections](https://docs.datastax.com/en/astra/docs/astra-collection-client.html)
-
-For now, let's go over the 3 methods we'll be using in this app:
-
-- `create`
-- `update`
-- `find`
-
-<br/>
-
-### 12. Create
 
 The `create` method is used when we want to add documents to our collection. For example, in **`functions/add.js`** we get our collection from the database using our `getCollection` method.
 
@@ -673,9 +674,7 @@ try {
 }
 ```
 
-<br/>
-
-### 13. Update
+#### `✅.4.2.c` - Update document with `@astrajs/collections`  
 
 The `update` method is used to update portions of existing documents. Take a look at **`functions/edit.js`**. Again we use `getCollection()` to get our collection from the database, then we use the `update` method, provide it with an id for the document we want to edit, and the data that needs updating.
 
@@ -688,9 +687,7 @@ try {
   }
 ```
 
-<br/>
-
-### 14. Find
+#### `✅.4.2.d` - Search document with `@astrajs/collections`  
 
 And finally the `find` method is used to retrieve documents. In **`functions/posts.js`** we are again using `getCollections()` and using the `find` method on the result.
 
@@ -706,32 +703,11 @@ try {
 
 In this case, we are passing an empty object to retrieve all documents. In a real-world scenario, we would pass a qualifier to get only the documents relevant to a specific user.
 
-Let's go back to SwaggerUI and give this a test.
-
-✅ Back in SwaggerUI, open up the section labelled "Search documents in a collection".
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_02.png?raw=true)
-
-✅ Again, we have to provide the Application Token, keyspace name, and this time we will also include the collection id: **`tktkposts`**. We should also increase the page size as the tool defaults to only returning 1 document, and we will be retrieving many. Go ahead and fill those fields and click 'Execute'.
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_03.png?raw=true)
-
-And we see all of the documents stored in our database.
-
-![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_04.png?raw=true)
-
-# Part 3 - Serverless Functions, how they work
-So how do these functions work with no back-end server?
-
-The short answer is that Netlify is providing the back-end environment for us. All we have to do is tell Netlify where to find the functions. Netlify will do the rest.
-
 ### 4.3 - Serverless configuration
-
-
 
 Take a look at `netlify.toml`.
 
-```
+```init
 [build]
 command = "npm run build"
 functions = "functions"
@@ -759,8 +735,8 @@ We can also see this in action by manually going to the endpoint on our Netlify 
 
 ### 4.4 - React Component
 
-## LAB 5 - Netlify Deployments
 
+## LAB 5 - Netlify Deployments
 
 ### 5.1 - Connect Netlify to your site
 
@@ -768,20 +744,28 @@ Execute each of the commands below to link your code to your Netlify deployment.
   * First thing, we'll need to **STOP** the `netlify dev` command we issued a moment ago. In the terminal where you executed the netlify command issue a `CTRL-C` (control key + the C key) in order to stop the process.
   * Then continue with the following commands
   * This will pop up a browser to authenticate with netlify
-  ```
-  netlify login
-  ```
-  _Note, when using GitPod the preview pane will not display this properly. You must click the "open in a new window" button in the very top right of the preview pane._
 
-  * This will link your workspace to the associated site
-  ```
-  netlify link
-  ```
+#### `✅.5.1.a` - Authenticate in Netlify
 
-  * This will take the .env file created by astra-setup and upload it to netlify
-  ```
-  netlify env:import .env
-  ```
+```
+netlify login
+```
+
+_Note, when using GitPod the preview pane will not display this properly. You must click the "open in a new window" button in the very top right of the preview pane._
+
+* This will link your workspace to the associated site
+
+```
+netlify link
+```
+
+#### `✅.5.1.b` - Import configuration in site
+
+* This will take the `.env` file created by astra-setup and upload it to netlify
+
+```
+netlify env:import .env
+```
 
 <!--
   * Will be used to allow you to execute `netlify open`
