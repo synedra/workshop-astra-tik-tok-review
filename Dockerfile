@@ -17,7 +17,6 @@ RUN curl -L https://deb.nodesource.com/setup_18.x | bash \
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | TERM=xterm-256color bash >> ./install.log
 RUN npm install -g npm@latest netlify-cli
-RUN npm install
 
 EXPOSE 8888
 EXPOSE 8443
