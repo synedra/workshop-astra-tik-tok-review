@@ -23,25 +23,23 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Frequently asked questions](#frequently-asked-questions)
   - [Materials for the Session](#materials-for-the-session)
   - [Homework](#Homework)
-- **Getting Started with Database**
+- **LAB 1 - Getting Started with Database**
   - [Create Astra DB Instance](#01--create-astra-account)
   - [Create Astra Credentials](#02--create-astra-credentials)
+- **LAB 2 - Document API**
   - [Using Document API](#using-document-api)
-- **Initialize Dev environment**  
+- **LAB 3 - IDE Setup**  
   - [Deploy to Netlify](#deploy-to-netlify)
   - [Launch GitPod](#launch-gitpod-ide)
   - [Astra CLI Setup](#astra-cli-setup)
-  - [Netlify CLI Setup](#astra-cli-setup)
-  - [Launch the application](#astra-cli-setup)
-- **Interact with Database**  
-  - [Configure and connect database](#7-configure-and-connect-database)
-  - [Install the Netlify CLI](#5-install-the-netlify-cli-command-line-interface)
-  - [Connecting the Database](#11-connecting-the-database)
-  - [Create](#12-create)
-  - [Update](#13-update)
-  - [Find](#14-find)
+  - [Netlify CLI Setup](#netlify-cli-setup)
+  - [Launch the application](#launch-your-app)
+- **LAB 4 - Coding Against DB**
+  - [Document API](#7-configure-and-connect-database)
+  - [AstraJS Client](#7-configure-and-connect-database)
   - [Serverless configuration](#15-serverless-configuration)
-- **Netlify Deployments**
+  - [React Component](#)
+- **LAB 5 - Netlify Deployments**
   - [Connect Netlify to your site](#9-connect-netlify-to-your-site)
   - [Deploy to production](#10-deploy-to-production)
 
