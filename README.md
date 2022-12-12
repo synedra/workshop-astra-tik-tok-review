@@ -186,20 +186,22 @@ Once the database status becomes is `active` we can start interacting with it. W
 
 #### `✅.04`- Lists Collections
 
-- Select the resource `GET/v2/namespaces/{namespace-id}/collections`
+- (1) - Select the resource `GET/v2/namespaces/{namespace-id}/collections`
 
 ![image](tutorial/images/list-collections-1.png?raw=true)
 
-- Click the `[Try It Out]` button
+- (2) - Click the `[Try It Out]` button
 
 ![image](tutorial/images/list-collections-2.png?raw=true)
 
-- Populate the form with the following values
+- (3) - Populate the form with the following values
 
 |Field| Value|
 |---|---|
 |**X-Cassandra-Token**| _autopopulated_ |
 |**namespace-id**| `tiktok_keyspace` |
+
+- (4) - Click on `[Execute]` button
 
 The output is empty (expected):
 
@@ -219,13 +221,15 @@ The output is empty (expected):
 |---|---|
 |**X-Cassandra-Token**| _autopopulated_ |
 |**namespace-id**| `tiktok_keyspace` |
-|**namespace-id**| `{"name":"story"}` |
+|**body**| `{"name":"story"}` |
 
-- (4) - You can see the output with `201` (created) code
+- (4) - Click on `[Execute]` button
+
+- (5) - You can see the output with `201` (created) code
 
 ![image](tutorial/images/create-collection-1.png?raw=true)
 
-- (5) - Following the steps in previous section list collections again, you should get 
+- (6) - Following the steps in previous section list collections again, you should get 
 
 ```json
 {
@@ -240,13 +244,37 @@ The output is empty (expected):
 
 #### `✅.05`- Create a first document
 
-With a document oriented API there is no strict schema to comply with. As such let us decide what a storey could look like
+With a document oriented API there is no strict schema to comply with. As such let us decide what a story could look like.
 
-```json
+
+- (1) - Select the resource `POST/v2/namespaces/{namespace-id}/collections/{collection-id}` _Create a new Document_
+
+- (2) - Click the `[Try It Out]` button
+
+- (3) - Populate the form with the following values
+
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**collection-id**| `story` |
+|**body**| ```json
 {
-
+  "id": 0,
+  "name": "Mo Farooq",
+  "username": "mofarooq32",
+  "avatar": "https://i.imgur.com/9KYq7VG.png",
+  "is_followed": true,
+  "video": "https://i.imgur.com/FTBP02Y.mp4",
+  "caption": "These ducks are MEGA cute",
+  "likes": 10,
+  "comments": 2,
+  "timestamp": "2019-03-10T09:08:31.020Z",
+  "button_visible": true,
 }
-```
+``` |
+
+
 
 
 #### `✅.04`- Create a Document Collections
