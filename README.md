@@ -24,7 +24,7 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Materials for the Session](#materials-for-the-session)
   - [Homework](#Homework)
 - **Getting Started with Database**
-  - [Create Astra DB Instance](#1-login-or-register-to-astra-db-and-create-database)
+  - [Create Astra DB Instance](#Create-Astra-DB-Instance)
   - [Using Document API](#)
   - [Generate application token](#6-generate-application-token-to-securely-connect-to-the-database)
 - **Initialize Dev environment**  
@@ -73,9 +73,9 @@ In this readme, we try to provide instructions for local development as well - b
 <summary><b> 2️⃣ What other prerequisites are required?</b></summary>
 <hr>
 <ul>
-<li>You will need an <b>Github account:</b>
-<li>You will need an <b>Astra account</b>: don't worry, we'll work through that in the following
-<li>You will need enough *real estate* on screen, we will ask you to open a few windows and it would not fit on mobiles (tablets should be OK)
+<li>You will need an <b>Github account</b>
+<li>You will need an <b>Astra account</b> don't worry, we'll work through that in the following
+<li>You will need enough <i>real estate</i> on screen, we will ask you to open a few windows and it would not fit on mobiles (tablets should be OK)
 
 </ul>
 </p>
@@ -102,6 +102,8 @@ It doesn't matter if you join our workshop live or you prefer to do at your own 
 - [Slide deck](./slides/slides.pdf)
 - [Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
+- [What is JamStack?](jamstack.md)
+- [Video tutorial with Ania Kubow](#video-tutorial-with-ania-kubow)
 
 ## Homework
 
@@ -117,24 +119,18 @@ That's it, you are done! Expect an email next week!
   
 # 🏁 Start Hands-on
 
+### Create Astra DB Instance
 
-## Table of contents
+_**`ASTRA`** is the simplest way to run both Cassandra and Pulsar with zero operations at all - just push the button and get your clusters. No credit card required_
 
-### Part I - Run and Deploy
+#### `✅.01`- Create Astra Account
 
+Leveraging [Database creation guide](https://awesome-astra.github.io/docs/pages/astra/create-instance/#c-procedure) create a database. 
+The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.dev/yt-9-14).
 
-### Extra resources
-[What is JamStack?](jamstack.md)
+> ↗️ _Right Click and select open as a new Tab..._
 
-[Video tutorial with Ania Kubow](#video-tutorial-with-ania-kubow)
-
-# Part 1 - Run and Deploy
-
-### 1. Login or Register to Astra DB and create database
-
-Click the button to login or register with Datastax
-
-<a href="https://astra.dev/11-10"><img src="tutorial/images/create_astra_db.png?raw=true" /></a>
+<a href="https://astra.dev/yt-12-14"><img src="tutorial/images/create_astra_db.png?raw=true" /></a>
 - <details><summary>Show me!</summary>
     <img src="https://github.com/datastaxdevs/workshop-spring-stargate/raw/main/images/tutorials/astra-create-db.gif?raw=true" />
 </details>
@@ -144,7 +140,125 @@ Click the button to login or register with Datastax
 |---|---|
 |**database name**| `workshops` |
 |**keyspace**| `tiktok_keyspace` |
-|**Cloud Provider**| *Use the one you like, click a cloud provider logo,  pick an Area in the list and finally pick a region.* |
+|**Cloud Provider**| *`Google Cloud Plaform` / `* |
+
+
+#### `✅.02`- Create Astra Credentials (token): 
+
+> **⚠️ Important**
+> ```
+> The instructor will show you on screen how to create a token 
+> but will have to destroy to token immediately for security reasons.
+> ```
+
+> [Documentation](https://awesome-astra.github.io/docs/pages/astra/create-token)
+
+_Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
+
+- Go the `Organization Settings`
+- Go to `Token Management`
+- Pick the role `Database Admnistrator` on the select box
+- Click Generate token
+
+<img src="tutorial/images/astra-create-token.gif?raw=true" />
+ 
+This is what the token page looks like. * Click the **`Download CSV`** button. You are going to need these values here in a moment.
+
+![image](tutorial/images/astra-token.png?raw=true)
+
+Notice the clipboard icon at the end of each value.
+
+- `Client ID:` We will *not* use this during this workshop
+- `Client Secret:` We will *not* use this during this workshop
+- `Token:` *This is your token!* We will use it as a api Key to interact with APIS
+
+[This video](https://www.youtube.com/watch?v=TUTCLsBuUd4) describes the procedure to generate a token in Astra DB.
+
+### Using Document API
+
+
+
+
+For our TikTok app, we will not be dealing with the Document API directly. Instead `@astrajs/collections` does that for us, and provides us with easy to use methods.
+
+If you want a comprehensive list of the capabilities of `@astrajs/collections`, check out this documentation: [AstraJS Collections](https://docs.datastax.com/en/astra/docs/astra-collection-client.html)
+
+For now, let's go over the 3 methods we'll be using in this app:
+
+- `create`
+- `update`
+- `find`
+
+<br/>
+
+### 12. Create
+
+The `create` method is used when we want to add documents to our collection. For example, in **`functions/add.js`** we get our collection from the database using our `getCollection` method.
+
+``` javascript
+const users = await getCollection();
+```
+
+Then we use the `create` method to create a document, providing the _id_ and _body_ of the document.
+
+``` javascript
+try {
+    const user = await users.create(id, event.body);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(user),
+    };
+}
+```
+
+<br/>
+
+### 13. Update
+
+The `update` method is used to update portions of existing documents. Take a look at **`functions/edit.js`**. Again we use `getCollection()` to get our collection from the database, then we use the `update` method, provide it with an id for the document we want to edit, and the data that needs updating.
+
+``` javascript
+try {
+    users.update(body.userId, body.data);
+    return {
+      statusCode: 200,
+    };
+  }
+```
+
+<br/>
+
+### 14. Find
+
+And finally the `find` method is used to retrieve documents. In **`functions/posts.js`** we are again using `getCollections()` and using the `find` method on the result.
+
+``` javascript
+try {
+    const res = await users.find({});
+    return {
+      statusCode: 200,
+      body: JSON.stringify(Object.keys(res).map((i) => res[i])),
+    };
+  }
+```
+
+In this case, we are passing an empty object to retrieve all documents. In a real-world scenario, we would pass a qualifier to get only the documents relevant to a specific user.
+
+Let's go back to SwaggerUI and give this a test.
+
+✅ Back in SwaggerUI, open up the section labelled "Search documents in a collection".
+
+![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_02.png?raw=true)
+
+✅ Again, we have to provide the Application Token, keyspace name, and this time we will also include the collection id: **`tktkposts`**. We should also increase the page size as the tool defaults to only returning 1 document, and we will be retrieving many. Go ahead and fill those fields and click 'Execute'.
+
+![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_03.png?raw=true)
+
+And we see all of the documents stored in our database.
+
+![swaggerui_link](./tutorial/images/swaggerui_searchdocuments_04.png?raw=true)
+
+
 
 ### 2. Deploy to Netlify
 - <details><summary> What does the netlify deploy button do?</summary>The Netlify deploy button will:<ul>
@@ -229,44 +343,7 @@ If the result returned from the command displays **`datastaxdevs`** then you are
     <img src="tutorial/images/netlify-install-cli.png?raw=true" />
     </details>
 
-### 6. Generate application token to securely connect to the database
 
-
-
-Following the [Documentation](https://docs.datastax.com/en/astra/docs/manage-application-tokens.html) create a token with `Database Admnistrator` roles.
-
-- Go the `Organization Settings`
-
-- Go to `Token Management`
-
-- Pick the role `Database Admnistrator` on the select box
-
-- Click Generate token
-
- * <details><summary>Show me!</summary>
-    <img src="tutorial/images/astra-create-token.gif?raw=true" />
-    </details>
-
-This is what the token page looks like. 
- * Click the **`Download CSV`** button. You are going to need these values here in a moment.
-
-![image](tutorial/images/astra-token.png?raw=true)
-
-Notice the clipboard icon at the end of each value.
-
-- `Client ID:` We will *not* use this during this workshop
-
-- `Client Secret:` We will *not* use this during this workshop
-
-- `Token:` *This is your token!* We will use it as a api Key to interact with APIS
-
-[This video](https://www.youtube.com/watch?v=TUTCLsBuUd4) describes the procedure to generate a token in Astra DB.
-
-> **⚠️ Important**
-> ```
-> The instructor will show you on screen how to create a token 
-> but will have to destroy to token immediately for security reasons.
-> ```
 
 ### 7. Configure and connect database
  
@@ -548,38 +625,20 @@ We can also see this in action by manually going to the endpoint on our Netlify 
 
 ![netlify_endpoint](./tutorial/images/netlify_endpoint_nav.gif)
 
-# Extra resources
+## Extra resources
 
-## Video tutorial with Ania Kubow
+#### Video tutorial with Ania Kubow
+
 Thank you to our wonderful friend Ania Kubow for producing the TikTok clone. If you are not aware of Ania and love learning about coding you should absolutely check out her YouTube channel listed below.
 
 While we focused on getting you up and running to production with Astra DB and Netlify, Ania's video will dig into more details on the app itself. Check it out to dig in more.
 
-<!--- STARTEXCLUDE --->
-## Running Astra DB Tik-Tok
+#### Running Astra DB Tik-Tok
 We're using Create-React-App and the Astra DB Document API to create a simple Tik-Tok clone.  Follow along in this video tutorial: [https://youtu.be/IATOicvih5A](https://youtu.be/IATOicvih5A).
 
 Follow the instructions below to get started.
 
-### Video Content:
-- [https://youtu.be/IATOicvih5A](https://youtu.be/IATOicvih5A)
-- (00:00) Introduction
-- (03:05) Creating our Database on DataStax
-- (06:52) Setting up our App
-- (12:37) Routing Pages
-- (18:02) Creating Components
-- (28:32) Introduction to Data with Netlify and Stargate
-- (30:10) Introduction to using the astrajs/collections
-- (34:01) Posting data to our Database (creating dummy Tik Tok posts)
-- (34:01) Adding authorization to access our Database
-- (43:10) Getting data from our Database (getting all our Tik Tok posts)
-- (50: 32) Viewing all our Data
-- (51:56) Rendering components based on our Data
-- (01:17:01) Editing our Data (following/unfollowing a user)
-- (01:32:57) Adding new Data to our Database (creating a Tik Tok post)
-
-### If you did like this video, please hit the Like and Subscribe button so I know to make more!
+#### If you did like this video, please hit the Like and Subscribe button so I know to make more!
 - Twitter: https://twitter.com/ania_kubow
 - YouTube: https://youtube.com/aniakubow
 - Instagram: https://instagram.com/aniakubow
-<!--- ENDEXCLUDE --->
