@@ -7,7 +7,6 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
 RUN set -ex; \
-	apt-get update; \
     apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends \
         chromium-chromedriver \
@@ -25,11 +24,11 @@ RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/
 #RUN chmod 777 /usr/lib/node_modules/astra-setup/node_modules/node-jq/bin/jq
 RUN chown -R gitpod:gitpod /workspace
 
-COPY --chown=gitpod:gitpod /root/config/.bashrc /home/gitpod/.bashrc
+COPY --chown=gitpod:gitpod /root/config/.bashrc /home/gitpod/.bashrc $HOME/.bashrc
 
-RUN pip3 install httpie-astra cqlsh
+RUN pip3 install httpie-astra 
 
-printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
+echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
 cd /workspace/workshop-astra-tik-tok 
 nvm install 16.13.0
