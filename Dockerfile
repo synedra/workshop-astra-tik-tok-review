@@ -10,8 +10,7 @@ RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/
 RUN chown -R gitpod:gitpod /workspace
 
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
-RUN export TERM=xterm-256color
-RUN curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
+RUN curl -Ls "https://dtsx.io/get-astra-cli" | TERM=xterm-256color bash >> ./install.log
 RUN cd /workspace/workshop-astra-tik-tok 
 RUN nvm install 16.13.0
 RUN npm install -g npm@latest
