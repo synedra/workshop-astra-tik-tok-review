@@ -19,24 +19,24 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
 ## 📋 Table of contents
 
 - **HouseKeeping**
-  - [Objectives](#objectives)
-  - [Frequently asked questions](#frequently-asked-questions)
-  - [Materials for the Session](#materials-for-the-session)
-  - [Homework](#Homework)
-- **LAB 1 - Getting Started with Database**
-  - [1.1 - Create Astra DB Instance](#01--create-astra-account)
-  - [1.2 - Create Astra Credentials](#02--create-astra-credentials)
-- **LAB 2 - Document API**
-  - [2.1 - Using Document API](#using-document-api)
-- **LAB 3 - IDE Setup**  
-  - [3.1 - Netlify site setup](#deploy-to-netlify)
-  - [3.2 - Launch GitPod](#launch-gitpod-ide)
-  - [3.3 - Astra CLI Setup](#astra-cli-setup)
-  - [3.4 - Netlify CLI Setup](#netlify-cli-setup)
-  - [3.5 - Launch the application](#launch-your-app)
-- **LAB 4 - Coding Against DB**
-  - [4.1 - Document API](#7-configure-and-connect-database)
-  - [4.2 - AstraJS Client](#7-configure-and-connect-database)
+  - [1. Objectives](#1---objectives)
+  - [2. Frequently asked questions](#2---frequently-asked-questions)
+  - [3. Materials for the Session](#3---materials-for-the-session)
+  - [4. Homework](#4---homework)
+- **[LAB 1 - Getting Started with Database](#lab-1---getting-started-with-database)**
+  - [1.1 - Create Astra DB Instance](#11---getting-started-with-database)
+  - [1.2 - Create Astra Credentials](#12---create-astra-credentials)
+- **[LAB 2 - Document API](#lab-2---document-api)**
+  - [2.1 - Using Document API](#21-using-document-api)
+- **[LAB 3 - IDE Setup](#lab-3---ide-setup)**  
+  - [3.1 - Netlify site setup](#31---netlify-site-setup)
+  - [3.2 - Launch GitPod](#32---launch-gitpod)
+  - [3.3 - Astra CLI Setup](#33---astra-cli-setup)
+  - [3.4 - Netlify CLI Setup](#34---netlify-cli-setup)
+  - [3.5 - Launch the application](#35-launch-your-app)
+- **[LAB 4 - Coding Against DB](#lab-4---coding-against-db)**
+  - [4.1 - Document API](#41---document-api)
+  - [4.2 - AstraJS Client](#42---astrajs-client)
   - [4.3 - Serverless configuration](#15-serverless-configuration)
   - [4.4 - React Component](#)
 - **LAB 5 - Netlify Deployments**
