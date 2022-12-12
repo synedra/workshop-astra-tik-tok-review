@@ -280,7 +280,9 @@ With a document oriented API there is no strict schema to comply with. As such l
 }
 ```
 
-- (4) - Should get a HTTP `201` (Created) and the output. A unique identifier has been created for our document.
+- (4) - Click on `[Execute]` button
+
+- (5) - Should get a HTTP `201` (Created) and the output. A unique identifier has been created for our document.
 
 ```json
 {
@@ -290,9 +292,101 @@ With a document oriented API there is no strict schema to comply with. As such l
 
 #### `✅.2.1.e`- Search documents in a collections
 
+- (1) - Select the resource `GET /v2/namespaces/{namespace-id}/collections/{collection-id}` _Search documents in a collection_
+
+- (2) - Click the `[Try It Out]` button
+
+- (3) - Populate the form with the following values
+
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**collection-id**| `story` |
+|**where**|  `{"username": {"$eq": "mofarooq32"}}` | 
+
+- (4) - Click on `[Execute]` button
+
+- (5) - You should get a result
+
+```json
+{
+  "data": {
+    "8aa07632-4ffb-46e5-9d78-b32e21847221": {
+      "avatar": "https://i.imgur.com/9KYq7VG.png",
+      "button_visible": true,
+      "caption": "These ducks are MEGA cute",
+      "comments": 2,
+      "is_followed": true,
+      "likes": 10,
+      "name": "Mo Farooq",
+      "username": "mofarooq32",
+      "video": "https://i.imgur.com/FTBP02Y.mp4"
+    }
+  }
+}
+```
+
 #### `✅.2.1.f`- Update a document
 
+- (1) - Select the resource `PUT /v2/namespaces/{namespace-id}/collections/{collection-id}/{document-id}` _Create or update a document with the provided document-id_
+
+- (2) - Click the `[Try It Out]` button
+
+- (3) - Populate the form with the following values
+
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**collection-id**| `story` |
+|**document-id**|  document you got before here `8aa07632-4ffb-46e5-9d78-b32e21847221` | 
+
+**body:** 
+```json
+{
+  "name": "New Name",
+  "username": "mofarooq32",
+  "avatar": "https://i.imgur.com/9KYq7VG.png",
+  "is_followed": true,
+  "video": "https://i.imgur.com/FTBP02Y.mp4",
+  "caption": "These ducks are MEGA cute",
+  "likes": 10,
+  "comments": 2,
+  "button_visible": true
+}
+```
+
+- (4) - Click on `[Execute]` button
+
+- (5) - You should get an updated document
+
 #### `✅.2.1.g`- Delete a document
+
+- (1) - Select the resource `DELETE /v2/namespaces/{namespace-id}/collections/{collection-id}/{document-id}
+` _ Delete a document_
+
+- (3) - Populate the form with the following values
+
+|Field| Value|
+|---|---|
+|**X-Cassandra-Token**| _autopopulated_ |
+|**namespace-id**| `tiktok_keyspace` |
+|**collection-id**| `story` |
+|**document-id**|  document you got before here `8aa07632-4ffb-46e5-9d78-b32e21847221` | 
+
+- (4) - Click on `[Execute]` button
+
+- (5) - You should get a result code of `204`
+
+```
+Code 204
+access-control-allow-credentials: true 
+access-control-allow-origin: https://50b31120-2303-4f45-a9dd-1cfb03e24ff1-us-east1.apps.astra.datastax.com 
+access-control-expose-headers: Date 
+date: Mon,12 Dec 2022 18:12:43 GMT 
+vary: Origin 
+```
 
 ## LAB 3 - IDE Setup
 
