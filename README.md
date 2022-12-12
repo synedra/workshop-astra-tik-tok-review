@@ -32,8 +32,8 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Launch GitPod](#launch-gitpod-ide)
   - [Astra CLI Setup](#astra-cli-setup)
   - [Netlify CLI Setup](#astra-cli-setup)
+  - [Launch the application](#astra-cli-setup)
 - **Interact with Database**  
-  
   - [Configure and connect database](#7-configure-and-connect-database)
   - [Install the Netlify CLI](#5-install-the-netlify-cli-command-line-interface)
   - [Connecting the Database](#11-connecting-the-database)
@@ -42,7 +42,6 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Find](#14-find)
   - [Serverless configuration](#15-serverless-configuration)
 - **Netlify Deployments**
-  - [Launch your app](#8-launch-your-app)
   - [Connect Netlify to your site](#9-connect-netlify-to-your-site)
   - [Deploy to production](#10-deploy-to-production)
 
@@ -461,12 +460,15 @@ cat .env
 > <img src="tutorial/images/netlify-install-cli.png?raw=true" />
 
 
-### 8. Launch your app
-  * Run the application 
+### Launch your app
+
+Run the application 
+
   ```
   netlify dev
   ```
-  * The application should automatically launch in the GitPod preview pane
+
+The application should automatically launch in the GitPod preview pane
 
 ### 9. Connect Netlify to your site
 Execute each of the commands below to link your code to your Netlify deployment.
