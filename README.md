@@ -37,11 +37,11 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
 - **[LAB 4 - Coding Against DB](#lab-4---coding-against-db)**
   - [4.1 - Document API](#41---document-api)
   - [4.2 - AstraJS Client](#42---astrajs-client)
-  - [4.3 - Serverless configuration](#15-serverless-configuration)
-  - [4.4 - React Component](#)
-- **LAB 5 - Netlify Deployments**
-  - [5.1 - Connect Netlify to your site](#9-connect-netlify-to-your-site)
-  - [5.2 - Deploy to production](#10-deploy-to-production)
+  - [4.3 - Serverless configuration](#43---serverless-configuration)
+  - [4.4 - React Component](#44---react-component)
+- **[LAB 5 - Netlify Deployments](#lab-5---netlify-deployments)**
+  - [5.1 - Connect Netlify to your site](#51---connect-netlify-to-your-site)
+  - [5.2 - Deploy to production](#52---deploy-to-production)
 
 ## Housekeeping
 
