@@ -25,8 +25,9 @@ A simple Tik-Tok clone running on Astra DB that leverages the Document API.
   - [Homework](#Homework)
 - **Getting Started with Database**
   - [Create Astra DB Instance](#Create-Astra-DB-Instance)
-  - [Using Document API](#)
-  - [Generate application token](#6-generate-application-token-to-securely-connect-to-the-database)
+  - [Create Astra Credentials](#Create-Astra-Credentials)
+  - [Using Document API](#Using-Document-API)
+  
 - **Initialize Dev environment**  
   - [Deploy to Netlify](#2-deploy-to-netlify)
   - [Access YOUR GitHub repository](#3-access-your-github-repository)
@@ -119,7 +120,7 @@ That's it, you are done! Expect an email next week!
   
 # 🏁 Start Hands-on
 
-### Create Astra DB Instance
+### Getting Started with Database
 
 _**`ASTRA`** is the simplest way to run both Cassandra and Pulsar with zero operations at all - just push the button and get your clusters. No credit card required_
 
@@ -142,8 +143,7 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 |**keyspace**| `tiktok_keyspace` |
 |**Cloud Provider**| *`Google Cloud Plaform` / `* |
 
-
-#### `✅.02`- Create Astra Credentials (token): 
+#### `✅.02`- Create Astra Credentials
 
 > **⚠️ Important**
 > ```
@@ -175,9 +175,6 @@ Notice the clipboard icon at the end of each value.
 [This video](https://www.youtube.com/watch?v=TUTCLsBuUd4) describes the procedure to generate a token in Astra DB.
 
 ### Using Document API
-
-
-
 
 For our TikTok app, we will not be dealing with the Document API directly. Instead `@astrajs/collections` does that for us, and provides us with easy to use methods.
 
