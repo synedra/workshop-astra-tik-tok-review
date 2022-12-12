@@ -9,8 +9,7 @@
 
 🎓 **Level** Beginner to Intermediate
 
-A simple Tik-Tok clone running on Astra DB that leverages the Document API.
-<!--- ENDEXCLUDE --->
+A simple Tik-Tok clone running on Astra DB that leverages the Document API. You can see the Demo [here](https://fanciful-licorice-ea1437.netlify.app)
 
 ![image](./screenshot.jpg)
 
@@ -487,6 +486,94 @@ netlify dev
 
 The application should automatically launch in the GitPod preview pane. You might see an error in the log for this firt launch, some data is inserted to the database.
 
+```
+◈ Netlify Dev ◈
+◈ Ignored general context env var: LANG (defined in process)
+◈ Injected .env file env var: ASTRA_DB_APPLICATION_TOKEN
+◈ Injected .env file env var: ASTRA_DB_GRAPHQL_URL
+◈ Injected .env file env var: ASTRA_DB_GRAPHQL_URL_ADMIN
+◈ Injected .env file env var: ASTRA_DB_GRAPHQL_URL_PLAYGROUND
+◈ Injected .env file env var: ASTRA_DB_GRAPHQL_URL_SCHEMA
+◈ Injected .env file env var: ASTRA_DB_ID
+◈ Injected .env file env var: ASTRA_DB_KEYSPACE
+◈ Injected .env file env var: ASTRA_DB_REGION
+◈ Injected .env file env var: ASTRA_DB_REST_URL
+◈ Injected .env file env var: ASTRA_DB_REST_URL_SWAGGER
+◈ Injected .env file env var: ASTRA_DB_SECURE_BUNDLE_PATH
+◈ Injected .env file env var: ASTRA_DB_SECURE_BUNDLE_URL
+◈ Injected .env file env var: ASTRA_ORG_ID
+◈ Injected .env file env var: ASTRA_ORG_NAME
+◈ Injected .env file env var: ASTRA_ORG_TOKEN
+◈ Loaded function add http://localhost:8888/.netlify/functions/add.
+◈ Loaded function addData http://localhost:8888/.netlify/functions/addData.
+◈ Loaded function edit http://localhost:8888/.netlify/functions/edit.
+◈ Loaded function posts http://localhost:8888/.netlify/functions/posts.
+◈ Functions server is listening on 36661
+◈ Setting up local development server
+
+────────────────────────────────────────────────────────────────
+  Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+
+❯ Version
+  @netlify/build 28.4.5
+
+❯ Flags
+  {}
+
+❯ Current directory
+  /workspace/workshop-astra-tik-tok
+
+❯ Config file
+  /workspace/workshop-astra-tik-tok/netlify.toml
+
+❯ Context
+  dev
+
+────────────────────────────────────────────────────────────────
+  1. Run command for local development                          
+────────────────────────────────────────────────────────────────
+
+◈ Starting Netlify Dev with Create React App
+
+> tik-tok-stargate@0.1.0 start
+> react-scripts start
+
+ℹ ｢wds｣: Project is running at http://10.0.5.2/
+ℹ ｢wds｣: webpack output is served from 
+ℹ ｢wds｣: Content not from webpack is served from /workspace/workshop-astra-tik-tok/public
+ℹ ｢wds｣: 404s will fallback to /
+Starting the development server...
+
+Compiled successfully!
+
+You can now view tik-tok-stargate in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.0.5.2:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+✔ Waiting for framework port 3000. This can be configured using the 'targetPort' property in the netlify.toml
+
+(dev.command completed in 9.4s)
+
+   ┌─────────────────────────────────────────────────┐
+   │                                                 │
+   │   ◈ Server now ready on http://localhost:8888   │
+   │                                                 │
+   └─────────────────────────────────────────────────┘
+
+⠦ Setting up the Edge Functions environment. This may take a couple of minutes.Request from ::ffff:192.168.9.75: POST /.netlify/functions/addData
+⠧ Setting up the Edge Functions environment. This may take a couple of minutes.Request from ::ffff:192.168.9.75: GET /.netlify/functions/posts
+⠙ Setting up the Edge Functions environment. This may take a couple of minutes.Response with status 200 in 341 ms.
+⠦ Setting up the Edge Functions environment. This may take a couple of minutes.Response with status 200 in 1609 ms.
+✔ Setting up the Edge Functions environment. This may take a couple of minutes.
+```
+
+![start](./tutorial/images/netlify-start.png?raw=true)
+
 ## LAB 4 - Coding Against DB
 
 ### 4.1 - Document API
@@ -753,10 +840,44 @@ netlify login
 
 _Note, when using GitPod the preview pane will not display this properly. You must click the "open in a new window" button in the very top right of the preview pane._
 
+![swaggerui_link](./tutorial/images/netlify-login.png?raw=true)
+
+```
+gitpod /workspace/workshop-astra-tik-tok (master) $ netlify login
+Logging into your Netlify account...
+Opening https://app.netlify.com/authorize?response_type=ticket&ticket=774701161c326912e718b3a86096f375
+
+You are now logged into your Netlify account!
+
+Run netlify status for account details
+
+To see all available commands run: netlify help
+```
+
+
+
+
 * This will link your workspace to the associated site
 
 ```
 netlify link
+```
+
+- In the list pick `Use current git remote origin`...
+
+```bash
+netlify link will connect this folder to a site on Netlify
+
+? How do you want to link this folder to a site? Use current git remote origin (https://github.com/clun/workshop-astra-tik-tok)
+
+Looking for sites connected to 'https://github.com/clun/workshop-astra-tik-tok'...
+
+Directory Linked
+
+Admin url: https://app.netlify.com/sites/fanciful-licorice-ea1437
+Site url:  https://fanciful-licorice-ea1437.netlify.app
+
+You can now run other `netlify` cli commands in this directory
 ```
 
 #### `✅.5.1.b` - Import configuration in site
@@ -767,35 +888,134 @@ netlify link
 netlify env:import .env
 ```
 
-<!--
-  * Will be used to allow you to execute `netlify open`
-  ```
-  netlify sites:list
-  ```
--->
+```
+site: fanciful-licorice-ea1437
+.--------------------------------
+...
+```
 
 ### 5.2 - Deploy to production
 
 Now that you've hooked everything up, time to deploy to production.
 
-  * Run
-  ```
-  netlify build
-  ```
+* Run
 
-  * Then run
-  ```
-  netlify deploy --prod
-  ```
+```
+netlify build
+```
 
-  * Then finally run
-  ```
-  netlify open:site
-  ```
-  
-  You've deployed your app to Netlify!
-  ![Netlify Setup Example](./tutorial/images/netlify-livesite.png?raw=true)
+```
 
+────────────────────────────────────────────────────────────────
+  Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+
+❯ Version
+  @netlify/build 28.4.5
+
+❯ Flags
+  dry: false
+  offline: false
+
+❯ Current directory
+  /workspace/workshop-astra-tik-tok
+
+❯ Config file
+  /workspace/workshop-astra-tik-tok/netlify.toml
+
+❯ Context
+  production
+
+────────────────────────────────────────────────────────────────
+  1. build.command from netlify.toml                            
+────────────────────────────────────────────────────────────────
+
+$ npm run build
+
+> tik-tok-stargate@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  616.87 KB  build/static/js/2.82b8325c.chunk.js
+  2.32 KB    build/static/js/main.fd7c93f3.chunk.js
+  966 B      build/static/css/main.9d8c5499.chunk.css
+  780 B      build/static/js/runtime-main.f09b770f.js
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+
+(build.command completed in 35.1s)
+
+────────────────────────────────────────────────────────────────
+  2. Functions bundling                                         
+────────────────────────────────────────────────────────────────
+
+Packaging Functions from functions directory:
+ - add.js
+ - addData.js
+ - edit.js
+ - posts.js
+
+
+(Functions bundling completed in 6.1s)
+
+────────────────────────────────────────────────────────────────
+  Netlify Build Complete                                        
+────────────────────────────────────────────────────────────────
+
+(Netlify Build completed in 41.3s)
+```
+
+
+
+- Then run
+
+```
+netlify deploy --prod
+```
+
+```
+Deploy path:        /workspace/workshop-astra-tik-tok/build
+Functions path:     /workspace/workshop-astra-tik-tok/functions
+Configuration path: /workspace/workshop-astra-tik-tok/netlify.toml
+Deploying to main site URL...
+✔ Deploying functions from cache (use --skip-functions-cache to override)
+✔ Finished hashing 17 files and 4 functions
+✔ CDN requesting 0 files and 4 functions
+✔ Finished uploading 4 assets
+✔ Deploy is live!
+
+Logs:              https://app.netlify.com/sites/fanciful-licorice-ea1437/deploys/63974804721fc334dc247455
+Unique Deploy URL: https://63974804721fc334dc247455--fanciful-licorice-ea1437.netlify.app
+Website URL:       https://fanciful-licorice-ea1437.netlify.app
+gitpod /workspace/workshop-astra-tik-tok (master) $ 
+```
+
+- Then finally run
+
+```
+netlify open:site
+```
+
+```
+Opening "fanciful-licorice-ea1437" site url:
+> https://fanciful-licorice-ea1437.netlify.app
+```
 
 ## Extra Resources
 
