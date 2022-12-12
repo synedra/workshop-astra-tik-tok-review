@@ -8,6 +8,7 @@
     { "name": "javascript" },
     { "name": "document API" }
   ],
+  "demo":"https://fanciful-licorice-ea1437.netlify.app/",
   "category": "workshop",
   "priority": 1
 }
