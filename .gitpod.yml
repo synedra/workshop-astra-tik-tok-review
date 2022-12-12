@@ -1,14 +1,5 @@
 tasks:
   - name: workshop-astra-tik-tok
-    before: |
-      printf 'export PATH="$HOME%s:$PATH"\n' "/.astra/cli" >> $HOME/.bashrc
-      printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
-      curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
-      cd /workspace/workshop-astra-tik-tok 
-      nvm install 16.13.0
-      npm install -g npm@latest
-      npm install -g netlify-cli
-      npm install
     command: |
       source ~/.bashrc
       echo "workshop-astra-tik-tok gitpod ready - LET'S DO THIS!"
