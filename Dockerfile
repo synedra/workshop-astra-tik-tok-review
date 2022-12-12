@@ -21,12 +21,9 @@ RUN curl -L https://deb.nodesource.com/setup_16.x | bash \
 RUN npm install --location=global astra-setup-linkedin@0.3.5 axios node-jq
 
 RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
-#RUN chmod 777 /usr/lib/node_modules/astra-setup/node_modules/node-jq/bin/jq
 RUN chown -R gitpod:gitpod /workspace
 
 COPY --chown=gitpod:gitpod /root/config/.bashrc /home/gitpod/.bashrc $HOME/.bashrc
-
-RUN pip3 install httpie-astra 
 
 RUN echo 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 RUN curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
