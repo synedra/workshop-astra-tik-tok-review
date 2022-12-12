@@ -10,7 +10,7 @@ RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/
 RUN chown -R gitpod:gitpod /workspace
 
 
-RUN curl -L https://deb.nodesource.com/setup_18.x | bash \
+RUN curl -L https://deb.nodesource.com/setup_16.x | bash \
     && apt-get update -yq \
 	  && apt-get install nodejs
 
