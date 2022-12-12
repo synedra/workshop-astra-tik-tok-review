@@ -127,7 +127,6 @@ _**`ASTRA`** is the simplest way to run both Cassandra and Pulsar with zero oper
 #### `✅.1.1.a`- Create Astra Account
 
 Follow the [Database creation guide](https://awesome-astra.github.io/docs/pages/astra/create-instance/#c-procedure) and create a database. 
-The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.dev/yt-9-14).
 
 <a href="https://astra.dev/yt-12-14" target="_blank"><img src="tutorial/images/create_astra_db.png?raw=true" /></a>
 
