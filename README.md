@@ -1,39 +1,99 @@
 <!--- STARTEXCLUDE --->
 # Astra DB TikTok Clone Workshop
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/DataStax-Academy/workshop-spring-data-cassandra) 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://github.com/datastaxdevs/workshop-social-media-tiktok) 
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-*50 minutes, Intermediate, [Start Building](#running-astra-tik-tok)*
+⏲️ **Duration :** 2 hours
+
+🎓 **Level** Beginner to Intermediate
 
 A simple Tik-Tok clone running on Astra DB that leverages the Document API.
 <!--- ENDEXCLUDE --->
 
 ![image](./screenshot.jpg)
 
+> [🔖 Accessing HANDS-ON](#-start-hands-on)
+
+## 📋 Table of contents
+
+- **HouseKeeping**
+  - [Objectives](#objectives)
+  - [Frequently asked questions](#frequently-asked-questions)
+  - [Materials for the Session](#materials-for-the-session)
+  - [Homework](#Homework)
+- **Getting Started with Database**
+  - [Create Astra DB Instance](#1-login-or-register-to-astra-db-and-create-database)
+  - [Using Document API](#)
+  - [Generate application token](#6-generate-application-token-to-securely-connect-to-the-database)
+- **Initialize Dev environment**  
+  - [Deploy to Netlify](#2-deploy-to-netlify)
+  - [Access YOUR GitHub repository](#3-access-your-github-repository)
+  - [Launch GitPod](#4-launch-gitpod-ide)
+- **Interact with Database**  
+  - [Configure and connect database](#7-configure-and-connect-database)
+  - [Install the Netlify CLI](#5-install-the-netlify-cli-command-line-interface)
+  - [Connecting the Database](#11-connecting-the-database)
+  - [Create](#12-create)
+  - [Update](#13-update)
+  - [Find](#14-find)
+  - [Serverless configuration](#15-serverless-configuration)
+- **Netlify Deployments**
+  - [Launch your app](#8-launch-your-app)
+  - [Connect Netlify to your site](#9-connect-netlify-to-your-site)
+  - [Deploy to production](#10-deploy-to-production)
+
 ## Objectives
-* Deploy a TikTok clone "locally" and to production
-* Learn how to use the @astrajs document API to quickly and easily interact with JSON documents
-* Leverage Netlify and DataStax AstraDB
 
-## ℹ️ Frequently asked questions ℹ️ 
+- 🎯 How to build a frontend application using React Components
 
-- *Can I run the workshop on my computer?*
-> There is nothing preventing you from running the workshop on your own machine. 
-> If you do so, you will need
-> * git installed on your local system
-> * [node 15 and npm 7 or later](https://www.whitesourcesoftware.com/free-developer-tools/blog/update-node-js/)
->
-> You will have to adapt commands and paths based on your environment and install the dependencies by yourself. **We won't provide support** to keep on track with schedule. However, we will do our best to give you the info you need to be successful.
+- 🎯 How to build a backend with Javascript without Express.
+ 
+- 🎯 Learn how to use the @astrajs document API to quickly and easily interact with JSON documents
 
-- *What other prerequisites are there?*
-> * You will need a github account
-> * You will also need Netlify and Astra DB accounts, but we'll work through that in the exercises
-> * Use **Chrome** or **Firefox** for the best experience. Other browsers are great, but don't work well with the GitPod integration we use a bit later.
+- 🎯 Learn what is gitpod and how you can use it in your projects
 
-- *Do I need to pay for anything for this workshop?*
-> * No. All tools and services we provide here are FREE.
+## Frequently asked questions
+
+<p/>
+<details>
+<summary><b> 1️⃣ Can I run this workshop on my computer?</b></summary>
+<hr>
+<p>There is nothing preventing you from running the workshop on your own machine. If you do so, you will need the following:
+<ol>
+<li><b>git installed on your local system</b>
+<li><b>[node 15 and npm 7 or later](https://www.whitesourcesoftware.com/free-developer-tools/blog/update-node-js/)</b>
+</ol>
+</p>
+In this readme, we try to provide instructions for local development as well - but keep in mind that the main focus is development on Gitpod, hence <strong>we can't guarantee live support</strong> about local development in order to keep on track with the schedule. However, we will do our best to give you the info you need to succeed.
+</details>
+<p/>
+<details>
+<summary><b> 2️⃣ What other prerequisites are required?</b></summary>
+<hr>
+<ul>
+<li>You will need an <b>Github account:</b>
+<li>You will need an <b>Astra account</b>: don't worry, we'll work through that in the following
+<li>You will need enough *real estate* on screen, we will ask you to open a few windows and it would not fit on mobiles (tablets should be OK)
+
+</ul>
+</p>
+</details>
+<p/>
+<details>
+<summary><b> 3️⃣ Do I need to pay for anything for this workshop?</b></summary>
+<hr>
+<b>No.</b> All tools and services we provide here are FREE. FREE not only during the session but also after.
+</details>
+<p/>
+<details>
+<summary><b> 4️⃣ Will I get a certificate if I attend this workshop?</b></summary>
+<hr>
+Attending the session is not enough. You need to complete the homework detailed below and you will get a nice badge that you can share on linkedin or anywhere else *(open badge specification)*
+</details>
+<p/>
+
 
 ## Materials for the Session
 
@@ -55,30 +115,13 @@ Don't forget to complete your upgrade and get your verified skill badge! Finish 
 
 That's it, you are done! Expect an email next week!
   
-# Let's start
+# 🏁 Start Hands-on
+
 
 ## Table of contents
 
 ### Part I - Run and Deploy
-1. [Create Astra DB Instance](#1-login-or-register-to-astra-db-and-create-database)
-2. [Deploy to Netlify](#2-deploy-to-netlify)
-3. [Access YOUR GitHub repository](#3-access-your-github-repository)
-4. [Launch GitPod](#4-launch-gitpod-ide)
-5. [Install the Netlify CLI](#5-install-the-netlify-cli-command-line-interface)
-6. [Generate application token to securely connect to the database](#6-generate-application-token-to-securely-connect-to-the-database)
-7. [Configure and connect database](#7-configure-and-connect-database)
-8. [Launch your app](#8-launch-your-app)
-9. [Connect Netlify to your site](#9-connect-netlify-to-your-site)
-10. [Deploy to production](#10-deploy-to-production)
 
-### Part 2 - Working with Astra DB and the document API
-11. [Connecting the Database](#11-connecting-the-database)
-
-### Part 3 - Serverless Functions, how they work
-12. [Create](#12-create)
-13. [Update](#13-update)
-14. [Find](#14-find)
-15. [Serverless configuration](#15-serverless-configuration)
 
 ### Extra resources
 [What is JamStack?](jamstack.md)
@@ -188,6 +231,8 @@ If the result returned from the command displays **`datastaxdevs`** then you are
 
 ### 6. Generate application token to securely connect to the database
 
+
+
 Following the [Documentation](https://docs.datastax.com/en/astra/docs/manage-application-tokens.html) create a token with `Database Admnistrator` roles.
 
 - Go the `Organization Settings`
@@ -224,32 +269,35 @@ Notice the clipboard icon at the end of each value.
 > ```
 
 ### 7. Configure and connect database
- * In the repository directory run the following command to set up your Astra DB environment. This will verify the database you created earlier or create a new one for you if it can't find your database.
- ```
- npm exec astra-setup workshops tiktok_keyspace
+ 
+- Setup the CLI
+
+```
+astra setup -t token
 ```
 
-<details>
-<summary>What does astra-setup do?</summary>
-    To setup your ASTRA instance, you want to run `npm exec astra-setup`
 
-    This will do the following:
-    * Have you go to your [Astra DB instance](https://datastx.io/workshops) to register or login. There is no credit card required to sign up. The 'Pay as you go' option gives you a huge amount of transactions for free:
-        * 30 million reads
-        * 5 million writes
-        * 40 gigabytes of storage
-    * Give steps to grab a Database Administrator Token and paste it into the input field
-    * Ask you what database you want to use (default, existing, create)
-    * Create or access the database
-    * Create/update an .env file in the project root
-    * Create/update an .astrarc file in your home directory
-        * This can be used by httpie-astra `pip3 install httpie-astra`
-        * It can also be used by the @astra/collections and @astra/rest node modules
+astra db get workshops
++------------------------+-----------------------------------------+
+| Attribute              | Value                                   |
++------------------------+-----------------------------------------+
+| Name                   | workshops                               |
+| id                     | 50b31120-2303-4f45-a9dd-1cfb03e24ff1    |
+| Status                 | ACTIVE                                  |
+| Default Cloud Provider | GCP                                     |
+| Default Region         | us-east1                                |
+| Default Keyspace       | tiktok_keyspace                         |
+| Creation Time          | 2022-12-12T11:14:58Z                    |
+|                        |                                         |
+| Keyspaces              | [0] tiktok_keyspace                     |
+|                        |                                         |
+|                        |                                         |
+| Regions                | [0] us-east1                            |
+|                        |                                         |
++------------------------+-----------------------------------------+
 
-    ## Specify the database and keyspace
-    You can run the script and tell it which database/keyspace to use by using:
-    `npm exec astra-setup databasename keyspacename`
-</details>
+
+
 
 ### 8. Launch your app
   * Run the application 

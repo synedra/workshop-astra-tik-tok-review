@@ -10,8 +10,10 @@ tasks:
       npm install -g netlify-cli
       npm install
     command: |
+      source ~/.bashrc
       echo "workshop-astra-tik-tok gitpod ready - LET'S DO THIS!"
       gp open README.md
+      astra
 github:
   prebuilds:
     master: true
