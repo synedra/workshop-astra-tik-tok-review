@@ -143,7 +143,6 @@ The Astra registration page should have opened with Gitpod, if not use [this lin
 
 _Skip this step is you already have a token. You can reuse the same token in our other workshops, too._
 
-
 - (1) - Go the `Organization Settings`
 - (2) - Go to `Token Management`
 - (3) - Pick the role `Database Admnistrator` on the select box
@@ -168,34 +167,35 @@ Notice the clipboard icon at the end of each value.
 
 ### Using Document API
 
-Once the database is `active` we can start interacting with it. We will use the document API.
+Once the database status becomes is `active` we can start interacting with it. We will use the HTTP document API.
 
 #### `✅.03`- Open Swagger User Interface
 
 - (1) -  Select your database in the left panel
-- (2) -  Select the tab `CONNECT`
-- (3) -  Select the Document API
-- (4) -  Open the Swagger UI
+- (2) -  Select the tab `Connect`
+- (3) -  Select the `Document API` bloc
+- (4) -  In `Launch Swagger UI` right click on the link to open in a new TAB
 
 ![image](tutorial/images/access-swagger.png?raw=true)
 
-- You should access to this screen
+- You should access this screen
 
-![image](tutorial/images/show-swagger.png?raw=true)
+> 🖥️ `Swagger UI`
+>
+> ![image](tutorial/images/show-swagger.png?raw=true)
 
 #### `✅.04`- Lists Collections
 
 - Select the resource `GET/v2/namespaces/{namespace-id}/collections`
 
-![image](tutorial/images/list-collection-1.png?raw=true)
+![image](tutorial/images/list-collections-1.png?raw=true)
 
 - Click the `[Try It Out]` button
 
-![image](tutorial/images/list-collection-1.png?raw=true)
+![image](tutorial/images/list-collections-2.png?raw=true)
 
-- Populate the form
+- Populate the form with the following values
 
-**Use the following values**
 |Field| Value|
 |---|---|
 |**X-Cassandra-Token**| _autopopulated_ |
@@ -213,9 +213,8 @@ The output is empty (expected):
 
 - (2) - Click the `[Try It Out]` button
 
-- (3) - Populate the form
+- (3) - Populate the form with the following values
 
-**Use the following values**
 |Field| Value|
 |---|---|
 |**X-Cassandra-Token**| _autopopulated_ |
@@ -239,6 +238,15 @@ The output is empty (expected):
 }
 ```
 
+#### `✅.05`- Create a first document
+
+With a document oriented API there is no strict schema to comply with. As such let us decide what a storey could look like
+
+```json
+{
+
+}
+```
 
 
 #### `✅.04`- Create a Document Collections
